@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Test</title>
+    <link rel = "stylesheet" href="./style.css">
+</head>
+
+<body>
+    <noscript>
+        <div style="background: #ffdddd; color: #a00; padding: 1em; text-align: center;">
+            This site requires JavaScript to function properly. Please enable JavaScript in your browser.
+        </div>
+    </noscript>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">HealthCare Pro</div>
+            <button class="mobile-menu-btn" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+ 
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Modern Healthcare Management</h1>
+            <p>Streamline your healthcare practice with our integrated digital solution. Enhance patient care and improve efficiency.</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary" onclick="openDoctorPortal()" aria-describedby="doctor-portal-desc">
+                    Doctor Dashboard
+                </button>
+                <button class="btn btn-secondary" onclick="openFrontDesk()" aria-describedby="front-desk-desc">
+                    Front Desk System
+                </button>
+            </div>
+            <div style="display: none;">
+                <div id="doctor-portal-desc">Access the secure doctor dashboard with patient records and AI-powered tools</div>
+                <div id="front-desk-desc">Open the speech-to-text appointment booking system</div>
+            </div>
+        </div>
+    </section>
+ 
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Powerful Features</h2>
+                <p>Everything you need to manage your healthcare practice efficiently</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon" role="img" aria-label="Doctor">👨‍⚕️</div>
+                    <h3>Doctor Dashboard</h3>
+                    <p>Complete patient management system with medical history, diagnosis tracking, and AI-powered prescription generation.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon" role="img" aria-label="Microphone">🎤</div>
+                    <h3>Voice Appointments</h3>
+                    <p>Revolutionary speech-to-text appointment booking system for front desk staff to schedule patients effortlessly.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon" role="img" aria-label="Security lock">🔒</div>
+                    <h3>Secure & Compliant</h3>
+                    <p>Advanced security features with role-based access control and full compliance with healthcare data regulations.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon" role="img" aria-label="Analytics chart">📊</div>
+                    <h3>Analytics Dashboard</h3>
+                    <p>Comprehensive reporting and analytics to help you make data-driven decisions for your practice.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon" role="img" aria-label="Prescription pill">💊</div>
+                    <h3>Prescription Management</h3>
+                    <p>Smart prescription system with drug interaction checking and automated refill reminders.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon" role="img" aria-label="Mobile phone">📱</div>
+                    <h3>Mobile Ready</h3>
+                    <p>Access your practice management tools anywhere, anytime with our mobile-responsive design.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+    <section class="access-section" id="access">
+        <div class="container">
+            <div class="access-content">
+                <h2>Get Started Today</h2>
+                <p>Choose your role and access the tools designed specifically for your needs in healthcare management.</p>
+                <div class="access-buttons">
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+    <section class="doctor-login" id="doctor-login" style="display:none;">
+        <div class="login-panel">
+            <div class="icon" aria-label="Doctor">🩺</div>
+            <h2>Doctor Login</h2>
+            <p style="margin-bottom: 18px;">Welcome back, Doctor! Please sign in to access your dashboard.</p>
+            <div class="demo-credentials" style="background:rgba(0,180,216,0.2);color:#fff;border-radius:10px;padding:0.5rem 1rem;margin-bottom:1rem;font-weight:bold;">
+                <strong>Demo:</strong> Username: <code>doctor1</code> | Password: <code>password</code>
+            </div>
+            <form id="doctor-login-form">
+                <div style="margin-bottom:20px;">
+                    <label for="doctor-username" style="display:block; margin-bottom:5px;">Username</label>
+                    <input type="text" id="doctor-username" name="username" style="width:100%; padding:10px; border-radius:5px; border:1px solid #ccc;">
+                </div>
+                <div style="margin-bottom:10px;">
+                    <label for="doctor-password" style="display:block; margin-bottom:5px;">Password</label>
+                    <input type="password" id="doctor-password" name="password" style="width:100%; padding:10px; border-radius:5px; border:1px solid #ccc;">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%; margin-top:10px;">Sign In</button>
+                <a href="#" class="forgot-link">Forgot Password?</a>
+            </form>
+        </div>
+    </section>
+ 
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Users Say</h2>
+                <p>Trusted by healthcare professionals worldwide</p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"This system has revolutionized how we manage our clinic. The voice appointment feature saves us hours every day."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">Dr</div>
+                        <div class="author-info">
+                            <h4>Dr. Sarah Johnson</h4>
+                            <span>Family Medicine Physician</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The prescription management system has significantly reduced errors and improved patient safety in our practice."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">Dr</div>
+                        <div class="author-info">
+                            <h4>Dr. Michael Chen</h4>
+                            <span>Internal Medicine Specialist</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The analytics dashboard provides insights that help us improve patient care and practice efficiency."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RN</div>
+                        <div class="author-info">
+                            <h4>Lisa Rodriguez</h4>
+                            <span>Practice Manager</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+    <footer class="footer" id="contact">
+        <div class="container">
+            <p>&copy; 2024 HealthCare Pro. All rights reserved.</p>
+            <p>Contact us: <a href="mailto:info@healthcarepro.com">info@healthcarepro.com</a> | <a href="tel:+1234567890">+1 (234) 567-8900</a></p>
+        </div>
+    </footer>
+
+    <script src="./script.js"></script>
+</body>
