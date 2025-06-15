@@ -5,37 +5,37 @@ let patients = [
         id: 1,
         name: 'John Smith',
         age: 45,
-        phone: '(555) 123-4567',
+        phone: '+91 XXXXXXXXXX',
         email: 'john.smith@email.com',
         lastVisit: '2024-06-10',
         diagnosis: 'Hypertension',
         prescription: 'Lisinopril 10mg daily',
         notes: 'Patient reports good compliance with medication. BP well controlled.',
-        vitals: { bp: '125/78', hr: '72', temp: '98.6°F', weight: '180 lbs' }
+        vitals: { bp: '125/78', hr: '72', temp: '98.6°F', weight: '180 kgs' }
     },
     {
         id: 2,
         name: 'Emily Johnson',
         age: 32,
-        phone: '(555) 987-6543',
+        phone: '+91 XXXXXXXXXX',
         email: 'emily.johnson@email.com',
         lastVisit: '2024-06-12',
         diagnosis: 'Type 2 Diabetes',
         prescription: 'Metformin 500mg twice daily',
         notes: 'HbA1c improved. Continue current regimen.',
-        vitals: { bp: '118/76', hr: '68', temp: '98.4°F', weight: '145 lbs' }
+        vitals: { bp: '118/76', hr: '68', temp: '98.4°F', weight: '145 kgs' }
     },
     {
         id: 3,
         name: 'Robert Wilson',
         age: 67,
-        phone: '(555) 456-7890',
+        phone: '+91 XXXXXXXXXX',
         email: 'robert.wilson@email.com',
         lastVisit: '2024-06-08',
         diagnosis: 'Arthritis',
         prescription: 'Ibuprofen 400mg as needed',
         notes: 'Joint pain manageable with current treatment.',
-        vitals: { bp: '135/82', hr: '75', temp: '98.7°F', weight: '195 lbs' }
+        vitals: { bp: '135/82', hr: '75', temp: '98.7°F', weight: '195 kgs' }
     }
 ];
 
@@ -46,7 +46,7 @@ let appointments = [
         date: '2024-06-16',
         time: '09:00',
         type: 'Regular Checkup',
-        phone: '(555) 111-2222',
+        phone: '+91 XXXXXXXXXX',
         status: 'confirmed'
     },
     {
@@ -55,7 +55,7 @@ let appointments = [
         date: '2024-06-16',
         time: '10:30',
         type: 'Follow-up',
-        phone: '(555) 333-4444',
+        phone: '+91 XXXXXXXXXX',
         status: 'pending'
     },
     {
@@ -64,7 +64,7 @@ let appointments = [
         date: '2024-06-17',
         time: '14:00',
         type: 'Consultation',
-        phone: '(555) 555-6666',
+        phone: '+91 XXXXXXXXXX',
         status: 'confirmed'
     }
 ];
