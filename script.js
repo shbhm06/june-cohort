@@ -1,3 +1,5 @@
+//refer comments
+
 let currentUser = null;
 let currentView = 'home';
 let patients = [
