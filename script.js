@@ -1,5 +1,3 @@
-//refer comments
-
 let currentUser = null;
 let currentView = 'home';
 let patients = [
@@ -13,7 +11,7 @@ let patients = [
         diagnosis: 'Hypertension',
         prescription: 'Lisinopril 10mg daily',
         notes: 'Patient reports good compliance with medication. BP well controlled.',
-        vitals: { bp: '125/78', hr: '72', temp: '98.6°F', weight: '180 kgs' }
+        vitals: { bp: '125/78', hr: '72', temp: '98.6°F', weight: '180 KGS' }
     },
     {
         id: 2,
@@ -25,7 +23,7 @@ let patients = [
         diagnosis: 'Type 2 Diabetes',
         prescription: 'Metformin 500mg twice daily',
         notes: 'HbA1c improved. Continue current regimen.',
-        vitals: { bp: '118/76', hr: '68', temp: '98.4°F', weight: '145 kgs' }
+        vitals: { bp: '118/76', hr: '68', temp: '98.4°F', weight: '145 KGS' }
     },
     {
         id: 3,
@@ -37,7 +35,7 @@ let patients = [
         diagnosis: 'Arthritis',
         prescription: 'Ibuprofen 400mg as needed',
         notes: 'Joint pain manageable with current treatment.',
-        vitals: { bp: '135/82', hr: '75', temp: '98.7°F', weight: '195 kgs' }
+        vitals: { bp: '135/82', hr: '75', temp: '98.7°F', weight: '195 KGS' }
     }
 ];
 
@@ -48,7 +46,7 @@ let appointments = [
         date: '2024-06-16',
         time: '09:00',
         type: 'Regular Checkup',
-        phone: '+91 XXXXXXXXXX',
+        phone: '(555) 111-2222',
         status: 'confirmed'
     },
     {
@@ -57,7 +55,7 @@ let appointments = [
         date: '2024-06-16',
         time: '10:30',
         type: 'Follow-up',
-        phone: '+91 XXXXXXXXXX',
+        phone: '(555) 333-4444',
         status: 'pending'
     },
     {
@@ -66,7 +64,7 @@ let appointments = [
         date: '2024-06-17',
         time: '14:00',
         type: 'Consultation',
-        phone: '+91 XXXXXXXXXX',
+        phone: '(555) 555-6666',
         status: 'confirmed'
     }
 ];
@@ -201,6 +199,7 @@ function setupSmoothScrolling() {
 
 // Navigation functions
 function openDoctorPortal() {
+    document.body.classList.add('hide-main-content');
     hideAllSections();
     showSection('doctor-login');
     currentView = 'doctor-login';
@@ -219,6 +218,7 @@ function openDoctorPortal() {
 }
 
 function openFrontDesk() {
+    document.body.classList.add('hide-main-content');
     hideAllSections();
     if (!document.getElementById('frontdesk-login')) {
         createFrontdeskLogin();
@@ -239,20 +239,32 @@ function goHome() {
 }
 
 function hideAllSections() {
-    const sections = ['hero', 'features', 'access-section', 'testimonials', 'footer', 
-                     'doctor-login', 'frontdesk-login', 'doctor-dashboard', 'frontdesk-dashboard'];
-    sections.forEach(id => {
+    // First hide everything
+    const allSections = ['hero', 'features', 'access-section', 'testimonials', 'footer', 
+                        'doctor-login', 'frontdesk-login', 'doctor-dashboard', 'frontdesk-dashboard'];
+    allSections.forEach(id => {
         const element = document.getElementById(id) || document.querySelector(`.${id}`);
         if (element) {
             element.style.display = 'none';
         }
     });
+
+    // If we're showing a login or dashboard, ensure main page sections stay hidden
+    if (currentView === 'doctor-login' || currentView === 'frontdesk-login' || 
+        currentView === 'doctor-dashboard' || currentView === 'frontdesk-dashboard') {
+        ['features', 'testimonials', 'footer'].forEach(id => {
+            const element = document.getElementById(id) || document.querySelector(`.${id}`);
+            if (element) {
+                element.style.display = 'none';
+            }
+        });
+    }
 }
 
 function showSection(id) {
     const element = document.getElementById(id) || document.querySelector(`.${id}`);
     if (element) {
-        if (id === 'doctor-login' || id === 'frontdesk-login') {
+        if (id === 'doctor-login' || id === 'frontdesk-login' || id === 'doctor-dashboard' || id === 'frontdesk-dashboard') {
             element.style.display = 'flex';
         } else {
             element.style.display = 'block';
@@ -343,6 +355,7 @@ function createFrontdeskLogin() {
     section.style.display = 'none';
     section.innerHTML = `
         <div class="login-panel">
+            <button class="close-btn" onclick="showHome()" style="position: absolute; top: 20px; right: 20px; background: none; border: none; color: white; font-size: 24px; cursor: pointer;">×</button>
             <div class="icon" aria-label="Reception">🏥</div>
             <h2>Front Desk Login</h2>
             <p style="margin-bottom: 18px;">Welcome to the appointment management system!</p>
@@ -359,7 +372,11 @@ function createFrontdeskLogin() {
                     <input type="password" id="frontdesk-password" name="password" required>
                 </div>
                 <button type="submit" class="btn btn-primary" style="width:100%; margin-top:10px;">Sign In</button>
-                <a href="#" class="forgot-link">Forgot Password?</a>
+                <div style="margin-top: 15px; text-align: center;">
+                    <a href="#" class="forgot-link">Forgot Password?</a>
+                    <br>
+                    <a href="#" class="forgot-link" onclick="showCreateAccount('frontdesk')">Create New Account</a>
+                </div>
             </form>
         </div>
     `;
@@ -372,6 +389,119 @@ function createFrontdeskLogin() {
     }
 }
 
+function createDoctorLogin() {
+    const section = document.createElement('section');
+    section.id = 'doctor-login';
+    section.className = 'doctor-login';
+    section.style.display = 'none';
+    section.innerHTML = `
+        <div class="login-panel">
+            <button class="close-btn" onclick="showHome()" style="position: absolute; top: 20px; right: 20px; background: none; border: none; color: white; font-size: 24px; cursor: pointer;">×</button>
+            <div class="icon" aria-label="Doctor">👨‍⚕️</div>
+            <h2>Doctor Login</h2>
+            <p style="margin-bottom: 18px;">Welcome to the doctor's portal!</p>
+            <div class="demo-credentials">
+                <strong>Demo:</strong> Username: <code>doctor1</code> | Password: <code>password</code>
+            </div>
+            <form id="doctor-login-form">
+                <div style="margin-bottom:20px;">
+                    <label for="doctor-username">Username</label>
+                    <input type="text" id="doctor-username" name="username" required>
+                </div>
+                <div style="margin-bottom:10px;">
+                    <label for="doctor-password">Password</label>
+                    <input type="password" id="doctor-password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%; margin-top:10px;">Sign In</button>
+                <div style="margin-top: 15px; text-align: center;">
+                    <a href="#" class="forgot-link">Forgot Password?</a>
+                    <br>
+                    <a href="#" class="forgot-link" onclick="showCreateAccount('doctor')">Create New Account</a>
+                </div>
+            </form>
+        </div>
+    `;
+    document.body.appendChild(section);
+    
+    // Add event listener for the new form
+    const form = section.querySelector('#doctor-login-form');
+    if (form) {
+        form.addEventListener('submit', handleDoctorLogin);
+    }
+}
+
+function showCreateAccount(role) {
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.style.cssText = `
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+        display: flex; align-items: center; justify-content: center;
+        z-index: 10000; animation: fadeIn 0.3s ease;
+    `;
+    
+    modal.innerHTML = `
+        <div style="background: var(--glass); padding: 2rem; border-radius: 15px; width: 90%; max-width: 400px;">
+            <h3 style="color: white; margin-bottom: 1.5rem;">Create New ${role === 'doctor' ? 'Doctor' : 'Front Desk'} Account</h3>
+            <form id="create-account-form">
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; color: white; margin-bottom: 0.5rem;">Full Name</label>
+                    <input type="text" id="new-name" required style="width: 100%; padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc;">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; color: white; margin-bottom: 0.5rem;">Username</label>
+                    <input type="text" id="new-username" required style="width: 100%; padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc;">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; color: white; margin-bottom: 0.5rem;">Password</label>
+                    <input type="password" id="new-password" required style="width: 100%; padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc;">
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; color: white; margin-bottom: 0.5rem;">Confirm Password</label>
+                    <input type="password" id="confirm-password" required style="width: 100%; padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc;">
+                </div>
+                <div style="text-align: center;">
+                    <button type="submit" class="btn btn-primary" style="margin-right: 0.5rem;">Create Account</button>
+                    <button type="button" class="btn btn-secondary close-modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Add event listeners
+    const form = modal.querySelector('#create-account-form');
+    const closeBtn = modal.querySelector('.close-modal');
+    
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('new-name').value;
+        const username = document.getElementById('new-username').value;
+        const password = document.getElementById('new-password').value;
+        const confirmPassword = document.getElementById('confirm-password').value;
+        
+        if (password !== confirmPassword) {
+            showError('Passwords do not match');
+            return;
+        }
+        
+        // Add new user to users object
+        users[username] = {
+            password: password,
+            role: role,
+            name: name
+        };
+        
+        modal.remove();
+        showSuccessMessage('Account created successfully! Please login with your new credentials.');
+    });
+    
+    closeBtn.addEventListener('click', () => {
+        modal.remove();
+    });
+}
+
 function createDoctorDashboard() {
     const section = document.createElement('section');
     section.id = 'doctor-dashboard';
@@ -381,12 +511,15 @@ function createDoctorDashboard() {
         <div class="container">
             <div class="dashboard-panel">
                 <div class="dashboard-profile">
-                    <div class="avatar">Dr</div>
+                    <div class="avatar">DR</div>
                     <div class="dashboard-profile-info">
                         <h3>${currentUser ? currentUser.name : 'Doctor'}</h3>
                         <p>Medical Professional</p>
                     </div>
-                    <button class="btn btn-secondary" onclick="logout()" style="margin-left: auto;">Logout</button>
+                    <div style="margin-left: auto; display: flex; gap: 10px;">
+                        <button class="btn btn-secondary" onclick="showDoctorLogin()">Back</button>
+                        <button class="btn btn-secondary" onclick="logout()">Logout</button>
+                    </div>
                 </div>
                 
                 <div class="dashboard-stats">
@@ -452,25 +585,24 @@ function createFrontdeskDashboard() {
                         <h3>${currentUser ? currentUser.name : 'Front Desk'}</h3>
                         <p>Reception Staff</p>
                     </div>
-                    <button class="btn btn-secondary" onclick="logout()" style="margin-left: auto;">Logout</button>
+                    <div style="margin-left: auto; display: flex; gap: 10px;">
+                        <button class="btn btn-secondary" onclick="showFrontdeskLogin()">Back</button>
+                        <button class="btn btn-secondary" onclick="logout()">Logout</button>
+                    </div>
                 </div>
                 
-                <div class="dashboard-stats">
-                    <div class="stat-card">
-                        <strong>${appointments.length}</strong>
+                <div class="dashboard-stats" style="display: flex; justify-content: center; gap: 20px; margin: 2rem 0;">
+                    <div class="stat-card" style="min-width: 200px; text-align: center;">
+                        <strong style="font-size: 2rem;">${appointments.length}</strong>
                         <span>Today's Appointments</span>
                     </div>
-                    <div class="stat-card">
-                        <strong>5</strong>
+                    <div class="stat-card" style="min-width: 200px; text-align: center;">
+                        <strong style="font-size: 2rem;">5</strong>
                         <span>Waiting Patients</span>
                     </div>
-                    <div class="stat-card">
-                        <strong>18</strong>
+                    <div class="stat-card" style="min-width: 200px; text-align: center;">
+                        <strong style="font-size: 2rem;">18</strong>
                         <span>Calls Answered</span>
-                    </div>
-                    <div class="stat-card">
-                        <strong>92%</strong>
-                        <span>Booking Rate</span>
                     </div>
                 </div>
 
@@ -496,7 +628,7 @@ function createFrontdeskDashboard() {
                         <input type="text" id="patient-name" placeholder="Patient Name" style="margin-bottom: 0.5rem;">
                         <input type="tel" id="patient-phone" placeholder="Phone Number" style="margin-bottom: 0.5rem;">
                         <input type="date" id="appointment-date" style="margin-bottom: 0.5rem;">
-                        <input type="time" id="appointment-time" style="margin-bottom: 0.5rem;">
+                        <textarea id="patient-symptoms" placeholder="Patient Symptoms" style="width: 100%; padding: 0.5rem; margin-bottom: 0.5rem; border-radius: 5px; border: 1px solid #ccc; min-height: 80px;"></textarea>
                         <select id="appointment-type" style="margin-bottom: 1rem;">
                             <option value="">Select Type</option>
                             <option value="Regular Checkup">Regular Checkup</option>
@@ -710,11 +842,14 @@ function renderAppointmentList() {
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 <div><strong style="color: white; font-size: 1.1rem;">${appointment.patientName}</strong>
                     <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; margin-top: 0.25rem;">
-                        ${appointment.date} at ${appointment.time}
+                        ${appointment.date}
                     </div>
                     <div style="color: rgba(255, 255, 255, 0.6); font-size: 0.85rem;">
                         ${appointment.type} | ${appointment.phone}
                     </div>
+                    ${appointment.symptoms ? `<div style="color: rgba(255, 255, 255, 0.6); font-size: 0.85rem; margin-top: 0.25rem;">
+                        Symptoms: ${appointment.symptoms}
+                    </div>` : ''}
                 </div>
                 <div style="display: flex; align-items: center; gap: 0.5rem;">
                     <span class="status-badge ${appointment.status}" style="padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem;">
@@ -748,11 +883,11 @@ function bookAppointment() {
     const name = document.getElementById('patient-name').value;
     const phone = document.getElementById('patient-phone').value;
     const date = document.getElementById('appointment-date').value;
-    const time = document.getElementById('appointment-time').value;
+    const symptoms = document.getElementById('patient-symptoms').value;
     const type = document.getElementById('appointment-type').value;
 
-    if (!name || !phone || !date || !time || !type) {
-        showError('Please fill in all fields');
+    if (!name || !phone || !date || !type) {
+        showError('Please fill in all required fields');
         return;
     }
 
@@ -760,7 +895,7 @@ function bookAppointment() {
         id: appointments.length + 1,
         patientName: name,
         date: date,
-        time: time,
+        symptoms: symptoms,
         type: type,
         phone: phone,
         status: 'pending'
@@ -774,7 +909,7 @@ function bookAppointment() {
     document.getElementById('patient-name').value = '';
     document.getElementById('patient-phone').value = '';
     document.getElementById('appointment-date').value = '';
-    document.getElementById('appointment-time').value = '';
+    document.getElementById('patient-symptoms').value = '';
     document.getElementById('appointment-type').value = '';
     
     showSuccessMessage('Appointment booked successfully!');
@@ -1170,3 +1305,42 @@ document.addEventListener('click', function(e) {
     if (modal) modal.remove();
   }
 });
+
+function showFrontdeskLogin() {
+    hideAllSections();
+    document.getElementById('frontdesk-login').style.display = 'block';
+    currentView = 'frontdesk-login';
+}
+
+function showDoctorLogin() {
+    hideAllSections();
+    document.getElementById('doctor-login').style.display = 'block';
+    currentView = 'doctor-login';
+}
+
+function showHome() {
+    document.body.classList.remove('hide-main-content');
+    hideAllSections();
+    showSection('hero');
+    showSection('features');
+    showSection('access-section');
+    showSection('testimonials');
+    showSection('footer');
+    currentView = 'home';
+    currentUser = null;
+    
+    // Reset hero section
+    const hero = document.querySelector('.hero');
+    const heroContent = document.querySelector('.hero-content');
+    if (hero && heroContent) {
+        hero.style.display = 'flex';
+        hero.style.alignItems = 'center';
+        hero.style.justifyContent = 'center';
+        heroContent.style.textAlign = 'center';
+        heroContent.style.margin = '0 auto';
+        heroContent.style.width = '100%';
+        
+        // Force a reflow to ensure styles are applied
+        void hero.offsetWidth;
+    }
+}

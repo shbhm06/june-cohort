@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Front Desk System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="../index.html" class="back-btn">← Back to Home</a>
+        </nav>
+    </header>
+
+    <!-- Front Desk Login Section -->
+    <section class="frontdesk-login" id="frontdesk-login">
+        <div class="login-panel">
+            <div class="icon" aria-label="Reception" style="font-size:3rem; margin-bottom:1.2rem; display:block; text-align:center;">🏥</div>
+            <h2 style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.5rem; text-align:center;">Front Desk Login</h2>
+            <p style="text-align:center; color:rgba(255,255,255,0.9); margin-bottom:1.5rem; font-weight:300;">Welcome to the appointment management system!</p>
+            <div class="demo-credentials" style="background:rgba(255,255,255,0.1);backdrop-filter:blur(20px);color:#fff;border-radius:15px;padding:1rem;margin-bottom:2rem;font-size:0.95rem;border:1px solid rgba(255,255,255,0.2);text-align:center;">
+                <strong>Demo:</strong> Username: <code style="background:rgba(255,255,255,0.2);padding:0.25rem 0.5rem;border-radius:5px;font-family:'Monaco',monospace;">frontdesk1</code> | Password: <code style="background:rgba(255,255,255,0.2);padding:0.25rem 0.5rem;border-radius:5px;font-family:'Monaco',monospace;">password</code>
+            </div>
+            <form id="frontdesk-login-form">
+                <div style="margin-bottom:20px;">
+                    <label for="frontdesk-username">Username</label>
+                    <input type="text" id="frontdesk-username" name="username" required>
+                </div>
+                <div style="margin-bottom:10px;">
+                    <label for="frontdesk-password">Password</label>
+                    <input type="password" id="frontdesk-password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%; margin-top:10px;">Sign In</button>
+                <a href="#" class="forgot-link">Forgot Password?</a>
+                <br>
+                <a href="#" class="forgot-link">Create New Account</a>
+            </form>
+        </div>
+    </section>
+
+    <!-- Front Desk Dashboard Section (hidden by default) -->
+    <section class="frontdesk-dashboard" id="frontdesk-dashboard" style="display:none;">
+        <div class="dashboard-panel">
+            <div class="dashboard-profile">
+                <div class="avatar">FD</div>
+                <div class="dashboard-profile-info">
+                    <h3 id="fd-name">Sarah Johnson</h3>
+                    <p>Reception Staff</p>
+                </div>
+                <button class="btn btn-secondary" id="fd-logout" style="margin-left: auto;">Logout</button>
+            </div>
+            <div class="dashboard-stats" style="justify-content:center;">
+                <div class="stat-card">
+                    <strong id="fd-appointments">3</strong>
+                    <span>Today's Appointments</span>
+                </div>
+                <div class="stat-card">
+                    <strong id="fd-waiting">5</strong>
+                    <span>Waiting Patients</span>
+                </div>
+                <div class="stat-card">
+                    <strong id="fd-calls">18</strong>
+                    <span>Calls Answered</span>
+                </div>
+            </div>
+            <div class="dashboard-notifications">
+                <h4 style="margin-bottom:0.5rem;">🎤 Voice Appointment Booking</h4>
+                <p style="color:rgba(255,255,255,0.8);margin-bottom:1rem;">Click the microphone and speak naturally: "Book an appointment for John Smith tomorrow at 2 PM"</p>
+                <div style="text-align:center;margin-bottom:2rem;">
+                    <button id="voice-btn" class="btn btn-primary" style="font-size:1.2rem;padding:1rem 2rem;">🎤 Start Voice Booking</button>
+                    <div id="voice-status" style="margin-top:1rem;font-style:italic;color:rgba(255,255,255,0.7);"></div>
+                    <div id="voice-transcript" style="margin-top:1rem;padding:1rem;background:rgba(255,255,255,0.1);border-radius:10px;min-height:50px;display:none;"></div>
+                </div>
+            </div>
+            <div class="upcoming-appointments">
+                <h4 style="margin-bottom:0.5rem;">Appointment Management</h4>
+                <div style="margin-bottom:1rem;">
+                    <button class="btn btn-secondary" id="manual-booking">Manual Booking</button>
+                </div>
+                <div id="appointment-form" style="display:none;background:rgba(255,255,255,0.1);padding:1.5rem;border-radius:15px;margin-bottom:1rem;">
+                    <h5 style="color:white;margin-bottom:1rem;">New Appointment</h5>
+                    <input type="text" id="patient-name" placeholder="Patient Name" style="margin-bottom:0.5rem;">
+                    <input type="tel" id="patient-phone" placeholder="Phone Number" style="margin-bottom:0.5rem;">
+                    <input type="date" id="appointment-date" style="margin-bottom:0.5rem;">
+                    <input type="text" id="appointment-symptoms" placeholder="Symptoms" style="margin-bottom:0.5rem;">
+                    <select id="appointment-type" style="margin-bottom:1rem;">
+                        <option value="">Select Type</option>
+                        <option value="Regular Checkup">Regular Checkup</option>
+                        <option value="Follow-up">Follow-up</option>
+                        <option value="Consultation">Consultation</option>
+                        <option value="Emergency">Emergency</option>
+                    </select>
+                    <div>
+                        <button class="btn btn-primary" id="book-appointment" style="margin-right:0.5rem;">Book Appointment</button>
+                        <button class="btn btn-secondary" id="cancel-booking">Cancel</button>
+                    </div>
+                </div>
+                <div id="appointment-list">
+                    <!-- Appointments will be listed here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html> 
